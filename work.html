@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js练习</title>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+        //表单验证
+        function sb(){
+        var haoma = document.getElementById('haoma').value;
+        var z = haoma;
+        var m= /^0?1[3|4|5|8][0-9]\d{8}$/;
+        var n=/^[1-9]\d*$|^0$/;
+        if(haoma == "" || !n.test(haoma)){
+ 
+        alert("不能为空且只能输入数字");
+        return false;
+        }
+        else if(!m.test(haoma)){
+        	alert("号码必须是11位");
+        	return false;
+        } else {
+            alert("ok");
+        }
+        document.getElementById('here').innerHTML = z;
+    } 
+ 	</script>
+</head>
+<body>
+<p>请输入电话号码：<input type="text" id="haoma"></p><button type="buttton" onclick="sb()">提交</button>
+<p>你的电话：</p>
+<p id="here"></p>
+</body>
+</html>
