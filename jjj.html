@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js的练习</title>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+	window.onload = function(){
+            var dd = document.getElementById('dome1');
+            var ds = document.getElementById('dome2');
+            var sp = document.getElementById('msg');
+            var spp = document.getElementById('ms');
+            var re = /^\s*$/g;
+            var rg = /[^\u4e00-\u9fa5]/g;
+            var reg = /[^a-zA-Z0-9]/ig;
+          
+           dd.onfocus = function(){
+           	      
+             	 sp.style.display = "block";
+                 sp.innerHTML = '<i class="ati"></i>请输入5-25个字符，建议输入中文符号！';
+
+              
+          }
+
+ 
+          dd.onblur = function(){
+          	 if(dd.length == 0 || re.test(dd.value)){
+                 sp.innerHTML = '不能为空';
+                 return false;
+             }else 
+             if(dd.value.length<5 || dd.value.length>25){
+             	  sp.innerHTML = '请输入5-25个字符!';
+                  return false;
+             	}else if(rg.test(dd.value)){
+                   sp.innerHTML = '请输入中文字符!';
+                   return false;
+             	}
+             	else{
+                  sp.innerHTML = 'ok';
+             	}
+              
+          }
+
+
+          ds.onfocus = function(){
+               spp.style.display = "block";
+               spp.innerHTML = '<i class="ati"></i>输入英文字母及数字的6个字符作为密码！';
+          }
+          ds.onblur = function(){
+               if(ds.length == 0 || re.test(ds.value)){
+                 spp.innerHTML = '不能为空';
+                 return false;
+             }else if(reg.test(ds.value)){
+             	 spp.innerHTML = '请输入英文字母及数字！';
+             }else if(ds.value.length != 6){
+             	  spp.innerHTML = '请输入6个字符!';
+                  return false;
+             }else{
+                  spp.innerHTML = 'ok';
+             	}
+             }
+}
+         
+ 	</script>
+</head>
+<body>
+<div style="position: relative;">
+会员名：<input type="text" id="dome1" ><span id="msg" style="display: none;margin-left:220px;margin-top:-21px;">输入5-25个字符</span>
+</div>
+<br>
+<div style="margin-top: 50px;position: absolute;">
+  密码：<input type="text" id="dome2"><span id="ms" style="display: none;margin-left:220px;margin-top:-21px;">输入5-25个字符</span>
+</div>
+</body>
+</html>
