@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js的练习</title>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+
+  function getlength(str){
+    return str.replace(/[^\x00-\xff]/g,"zz").length;
+  }
+
+  function findstr(str,n){
+    var tmp = 0;
+    for(var i=0; i < str.length; i++){
+       if(str.charAt(i) == n){
+        tmp++;
+      }
+    }
+    return tmp;
+  }
+
+	window.onload = function(){
+            var dd = document.getElementById('dome1');
+            var ds = document.getElementById('dome2');
+            var dome3 = document.getElementById('dome3');
+            var sp = document.getElementById('msg');
+            var spp = document.getElementById('ms');
+            var sppp = document.getElementById('m');
+            var count = document.getElementById('count');
+            var re = /^\s*$/g;
+            var rg = /[^\u4e00-\u9fa5]/g;
+            var reg = /[^a-zA-Z0-9]/ig;
+            var re_n =/[^0-9]/g;
+            var re_m =/[^a-zA-Z]/ig;
+            var dd_length = 0;
+          
+           dd.onfocus = function(){
+           	      
+             	 sp.style.display = "block";
+                 sp.innerHTML = '<i class="ati"></i>请输入5-25个字符，建议输入中文符号！';
+
+              
+          }
+
+          dd.onkeyup = function(){
+             count.style.visibility = "visible";
+             dd_length = getlength(this.value);
+             count.innerHTML = dd_length + "个字符";
+             if(dd_length == 0){
+               count.style.visibility = "hidden";
+             }
+          }
+  
+          dd.onblur = function(){
+          	 if(dd.length == 0 || re.test(dd.value)){
+                 sp.innerHTML = '不能为空';
+                 return false;
+             }else 
+             if(dd.value.length<5 || dd.value.length>25){
+             	  sp.innerHTML = '请输入5-25个字符!';
+                  return false;
+             	}else if(rg.test(dd.value)){
+                   sp.innerHTML = '请输入中文字符!';
+                   return false;
+             	}
+             	else{
+                  sp.innerHTML = 'ok';
+             	}
+              
+          }
+ 
+          ds.onfocus = function(){
+               spp.style.display = "block";
+               spp.innerHTML = '<i class="ati"></i>输入英文字母及数字的6个字符作为密码！';
+          }
+
+          ds.onkeyup = function(){
+               if(this.value.length == 6){
+                dome3.removeAttribute("disabled");
+                m.style.display = "block";
+               }
+               else{
+                 dome3.setAttribute("disabled");
+                 m.style.display="none";
+               }             
+          }
+
+          ds.onblur = function(){
+            var mm = findstr(ds.value,ds.value[0]);
+            if(ds.length == 0 || re.test(ds.value)){
+                 spp.innerHTML = '不能为空';
+                 return false;
+             }
+             else if(reg.test(ds.value)){
+             	 spp.innerHTML = '<i class="err"></i>请输入英文字母及数字！';
+             }
+             else if(ds.value.length != 6){
+             	  spp.innerHTML = '请输入6个字符!';
+                  return false;
+             }
+             else if(mm == this.value.length){
+                spp.innerHTML = '不能输入相同字符!';
+                  return false;
+              }
+              else if(!re_n.test(this.value)){
+                  spp.innerHTML = '不能全为数字!';
+                  return false;
+
+             }
+             else if(!re_m.test(this.value)){
+              spp.innerHTML = '不能全为字母!';
+                  return false;
+
+             }
+             else{
+                  spp.innerHTML = 'ok';
+             	}
+        }
+
+        dome3.onblur = function(){
+          if(this.value != ds.value){
+            sppp.innerHTML = '两次输入的密码不一致，请重新输入！';
+          }else
+
+          {
+            sppp.innerHTML = 'ok';
+          }
+        }
+}
+         
+ 	</script>
+</head>
+<body>
+<div style="width:500px;margin:50px auto;">
+<div style="position: relative;font-weight:bold;">
+会员名：<input type="text" id="dome1" style="margin-left:5px;"><span id="msg" style="display: none;margin-left:220px;margin-top:-21px;color: red;">输入5-25个字符</span>
+</div>
+<a id="count" style="margin-left:70px;color:#ccc;"></a>
+<div style="margin-top: 35px;position: absolute;font-weight:bold;">
+  密码：<input type="text" id="dome2" style="margin-left:23px;"><span id="ms" style="display: none;margin-left:220px;margin-top:-21px;color: red;">输入5-25个字符</span>
+</div>
+<div style="margin-top: 100px;position: absolute;font-weight:bold;">
+  确认密码：<input type="text" id="dome3" disabled="/" style="margin-left:-1px;"><span id="m" style="display:none;margin-left:240px;margin-top:-21px;color: red;">请再次输入密码</span>
+</div>
+</div>
+</body>
+</html>
